@@ -16,6 +16,9 @@
     <Filter Include="源文件\fec">
       <UniqueIdentifier>{c78aca37-1285-49cc-8ed4-887f7dd0131e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\rtp">
+      <UniqueIdentifier>{0647e63c-0c12-44bd-9246-2fe06b357977}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="fec\fec.h">
       <Filter>源文件\fec</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp\rtp.h">
+      <Filter>源文件\rtp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
