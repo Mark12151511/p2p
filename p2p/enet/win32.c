@@ -2,7 +2,13 @@
  @file  win32.c
  @brief ENet Win32 system specific functions
 */
+
+
 #ifdef _WIN32
+
+#ifndef _WINSOCK_DEPRECATED_NO_WARNINGS
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#endif
 
 #define ENET_BUILDING_LIB 1
 #include "enet/enet.h"

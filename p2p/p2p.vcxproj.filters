@@ -22,6 +22,27 @@
     <Filter Include="源文件\enet">
       <UniqueIdentifier>{346fbe99-09da-4b3e-b732-66ccbfd8362f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\razor">
+      <UniqueIdentifier>{6523bc1f-659f-46f0-b63a-b4dcc5b57516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\razor\bbr">
+      <UniqueIdentifier>{5f4ae6bb-761d-47ad-8b9a-4ff146fe19ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\razor\cc">
+      <UniqueIdentifier>{4f5e4cdd-1eb5-414f-9c37-183f015ff028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\razor\common">
+      <UniqueIdentifier>{8634ef31-df0d-47ae-b9d7-2678721ee89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\razor\pacing">
+      <UniqueIdentifier>{1efa350c-afc0-48b4-a9d6-37afac3724f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\razor\remb">
+      <UniqueIdentifier>{8fdfcd50-f889-45c8-83f8-e9e1211f1bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\razor\estimator">
+      <UniqueIdentifier>{50dceadd-b522-4191-809d-d051a8300db9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,6 +81,135 @@
     <ClCompile Include="enet\win32.c">
       <Filter>源文件\enet</Filter>
     </ClCompile>
+    <ClCompile Include="razor\bbr\bbr_bandwidth_sample.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\bbr\bbr_common.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\bbr\bbr_controller.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\bbr\bbr_feedback_adpater.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\bbr\bbr_loss_rate_filter.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\bbr\bbr_pacer.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\bbr\bbr_receiver.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\bbr\bbr_rtt_stats.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\bbr\bbr_sender.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\bbr\windowed_filter.c">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\cc\razor_api.c">
+      <Filter>源文件\razor\cc</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\cc\razor_log.c">
+      <Filter>源文件\razor\cc</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\cc\receiver_congestion_controller.c">
+      <Filter>源文件\razor\cc</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\cc\sender_congestion_controller.c">
+      <Filter>源文件\razor\cc</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\common\cf_crc32.c">
+      <Filter>源文件\razor\common</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\common\cf_hex.c">
+      <Filter>源文件\razor\common</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\common\cf_list.c">
+      <Filter>源文件\razor\common</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\common\cf_skiplist.c">
+      <Filter>源文件\razor\common</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\common\cf_stream.c">
+      <Filter>源文件\razor\common</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\common\cf_unwrapper.c">
+      <Filter>源文件\razor\common</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\common\platform\windows\mscc.c">
+      <Filter>源文件\razor\common</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\ack_bitrate_estimator.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\aimd_rate_control.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\bitrate_controller.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\cc_feedback_adapter.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\cc_loss_stat.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\delay_base_bwe.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\estimator_common.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\inter_arrival.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\kalman_filter.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\overuse_detector.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\rate_stat.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\remote_bitrate_estimator.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\remote_estimator_proxy.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\sender_bandwidth_estimator.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\sender_history.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\estimator\trendline.c">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\remb\remb_receiver.c">
+      <Filter>源文件\razor\remb</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\remb\remb_sender.c">
+      <Filter>源文件\razor\remb</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\pacing\alr_detector.c">
+      <Filter>源文件\razor\pacing</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\pacing\interval_budget.c">
+      <Filter>源文件\razor\pacing</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\pacing\pace_sender.c">
+      <Filter>源文件\razor\pacing</Filter>
+    </ClCompile>
+    <ClCompile Include="razor\pacing\pacer_queue.c">
+      <Filter>源文件\razor\pacing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fec\rs.h">
@@ -97,6 +247,138 @@
     </ClInclude>
     <ClInclude Include="enet\win32.h">
       <Filter>源文件\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\bbr_bandwidth_sample.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\bbr_common.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\bbr_controller.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\bbr_feedback_adpater.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\bbr_loss_rate_filter.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\bbr_pacer.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\bbr_receiver.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\bbr_rtt_stats.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\bbr_sender.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\bbr\windowed_filter.h">
+      <Filter>源文件\razor\bbr</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\cc\razor_api.h">
+      <Filter>源文件\razor\cc</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\cc\razor_callback.h">
+      <Filter>源文件\razor\cc</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\cc\razor_log.h">
+      <Filter>源文件\razor\cc</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\cc\receiver_congestion_controller.h">
+      <Filter>源文件\razor\cc</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\cc\sender_congestion_controller.h">
+      <Filter>源文件\razor\cc</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\common\cf_crc32.h">
+      <Filter>源文件\razor\common</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\common\cf_hex.h">
+      <Filter>源文件\razor\common</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\common\cf_list.h">
+      <Filter>源文件\razor\common</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\common\cf_platform.h">
+      <Filter>源文件\razor\common</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\common\cf_skiplist.h">
+      <Filter>源文件\razor\common</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\common\cf_stream.h">
+      <Filter>源文件\razor\common</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\common\cf_unwrapper.h">
+      <Filter>源文件\razor\common</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\ack_bitrate_estimator.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\aimd_rate_control.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\bitrate_controller.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\cc_feedback_adapter.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\cc_loss_stat.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\delay_base_bwe.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\estimator_common.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\inter_arrival.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\kalman_filter.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\overuse_detector.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\rate_stat.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\remote_bitrate_estimator.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\remote_estimator_proxy.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\sender_bandwidth_estimator.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\sender_history.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\estimator\trendline.h">
+      <Filter>源文件\razor\estimator</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\remb\remb_receiver.h">
+      <Filter>源文件\razor\remb</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\remb\remb_sender.h">
+      <Filter>源文件\razor\remb</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\pacing\alr_detector.h">
+      <Filter>源文件\razor\pacing</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\pacing\interval_budget.h">
+      <Filter>源文件\razor\pacing</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\pacing\pace_sender.h">
+      <Filter>源文件\razor\pacing</Filter>
+    </ClInclude>
+    <ClInclude Include="razor\pacing\pacer_queue.h">
+      <Filter>源文件\razor\pacing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -95,6 +95,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)razor;$(ProjectDir)razor\bbr;$(ProjectDir)razor\cc;$(ProjectDir)razor\common;$(ProjectDir)razor\estimator;$(ProjectDir)razor\remb;$(ProjectDir)razor\pacing;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -106,6 +108,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)razor;$(ProjectDir)razor\bbr;$(ProjectDir)razor\cc;$(ProjectDir)razor\common;$(ProjectDir)razor\estimator;$(ProjectDir)razor\remb;$(ProjectDir)razor\pacing;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -119,6 +123,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)razor;$(ProjectDir)razor\bbr;$(ProjectDir)razor\cc;$(ProjectDir)razor\common;$(ProjectDir)razor\estimator;$(ProjectDir)razor\remb;$(ProjectDir)razor\pacing;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -134,6 +140,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)razor;$(ProjectDir)razor\bbr;$(ProjectDir)razor\cc;$(ProjectDir)razor\common;$(ProjectDir)razor\estimator;$(ProjectDir)razor\remb;$(ProjectDir)razor\pacing;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -154,6 +162,49 @@
     <ClCompile Include="fec\fec.cpp" />
     <ClCompile Include="fec\rs.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="razor\bbr\bbr_bandwidth_sample.c" />
+    <ClCompile Include="razor\bbr\bbr_common.c" />
+    <ClCompile Include="razor\bbr\bbr_controller.c" />
+    <ClCompile Include="razor\bbr\bbr_feedback_adpater.c" />
+    <ClCompile Include="razor\bbr\bbr_loss_rate_filter.c" />
+    <ClCompile Include="razor\bbr\bbr_pacer.c" />
+    <ClCompile Include="razor\bbr\bbr_receiver.c" />
+    <ClCompile Include="razor\bbr\bbr_rtt_stats.c" />
+    <ClCompile Include="razor\bbr\bbr_sender.c" />
+    <ClCompile Include="razor\bbr\windowed_filter.c" />
+    <ClCompile Include="razor\cc\razor_api.c" />
+    <ClCompile Include="razor\cc\razor_log.c" />
+    <ClCompile Include="razor\cc\receiver_congestion_controller.c" />
+    <ClCompile Include="razor\cc\sender_congestion_controller.c" />
+    <ClCompile Include="razor\common\cf_crc32.c" />
+    <ClCompile Include="razor\common\cf_hex.c" />
+    <ClCompile Include="razor\common\cf_list.c" />
+    <ClCompile Include="razor\common\cf_skiplist.c" />
+    <ClCompile Include="razor\common\cf_stream.c" />
+    <ClCompile Include="razor\common\cf_unwrapper.c" />
+    <ClCompile Include="razor\common\platform\windows\mscc.c" />
+    <ClCompile Include="razor\estimator\ack_bitrate_estimator.c" />
+    <ClCompile Include="razor\estimator\aimd_rate_control.c" />
+    <ClCompile Include="razor\estimator\bitrate_controller.c" />
+    <ClCompile Include="razor\estimator\cc_feedback_adapter.c" />
+    <ClCompile Include="razor\estimator\cc_loss_stat.c" />
+    <ClCompile Include="razor\estimator\delay_base_bwe.c" />
+    <ClCompile Include="razor\estimator\estimator_common.c" />
+    <ClCompile Include="razor\estimator\inter_arrival.c" />
+    <ClCompile Include="razor\estimator\kalman_filter.c" />
+    <ClCompile Include="razor\estimator\overuse_detector.c" />
+    <ClCompile Include="razor\estimator\rate_stat.c" />
+    <ClCompile Include="razor\estimator\remote_bitrate_estimator.c" />
+    <ClCompile Include="razor\estimator\remote_estimator_proxy.c" />
+    <ClCompile Include="razor\estimator\sender_bandwidth_estimator.c" />
+    <ClCompile Include="razor\estimator\sender_history.c" />
+    <ClCompile Include="razor\estimator\trendline.c" />
+    <ClCompile Include="razor\pacing\alr_detector.c" />
+    <ClCompile Include="razor\pacing\interval_budget.c" />
+    <ClCompile Include="razor\pacing\pacer_queue.c" />
+    <ClCompile Include="razor\pacing\pace_sender.c" />
+    <ClCompile Include="razor\remb\remb_receiver.c" />
+    <ClCompile Include="razor\remb\remb_sender.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet\callbacks.h" />
@@ -167,6 +218,50 @@
     <ClInclude Include="enet\win32.h" />
     <ClInclude Include="fec\fec.h" />
     <ClInclude Include="fec\rs.h" />
+    <ClInclude Include="razor\bbr\bbr_bandwidth_sample.h" />
+    <ClInclude Include="razor\bbr\bbr_common.h" />
+    <ClInclude Include="razor\bbr\bbr_controller.h" />
+    <ClInclude Include="razor\bbr\bbr_feedback_adpater.h" />
+    <ClInclude Include="razor\bbr\bbr_loss_rate_filter.h" />
+    <ClInclude Include="razor\bbr\bbr_pacer.h" />
+    <ClInclude Include="razor\bbr\bbr_receiver.h" />
+    <ClInclude Include="razor\bbr\bbr_rtt_stats.h" />
+    <ClInclude Include="razor\bbr\bbr_sender.h" />
+    <ClInclude Include="razor\bbr\windowed_filter.h" />
+    <ClInclude Include="razor\cc\razor_api.h" />
+    <ClInclude Include="razor\cc\razor_callback.h" />
+    <ClInclude Include="razor\cc\razor_log.h" />
+    <ClInclude Include="razor\cc\receiver_congestion_controller.h" />
+    <ClInclude Include="razor\cc\sender_congestion_controller.h" />
+    <ClInclude Include="razor\common\cf_crc32.h" />
+    <ClInclude Include="razor\common\cf_hex.h" />
+    <ClInclude Include="razor\common\cf_list.h" />
+    <ClInclude Include="razor\common\cf_platform.h" />
+    <ClInclude Include="razor\common\cf_skiplist.h" />
+    <ClInclude Include="razor\common\cf_stream.h" />
+    <ClInclude Include="razor\common\cf_unwrapper.h" />
+    <ClInclude Include="razor\estimator\ack_bitrate_estimator.h" />
+    <ClInclude Include="razor\estimator\aimd_rate_control.h" />
+    <ClInclude Include="razor\estimator\bitrate_controller.h" />
+    <ClInclude Include="razor\estimator\cc_feedback_adapter.h" />
+    <ClInclude Include="razor\estimator\cc_loss_stat.h" />
+    <ClInclude Include="razor\estimator\delay_base_bwe.h" />
+    <ClInclude Include="razor\estimator\estimator_common.h" />
+    <ClInclude Include="razor\estimator\inter_arrival.h" />
+    <ClInclude Include="razor\estimator\kalman_filter.h" />
+    <ClInclude Include="razor\estimator\overuse_detector.h" />
+    <ClInclude Include="razor\estimator\rate_stat.h" />
+    <ClInclude Include="razor\estimator\remote_bitrate_estimator.h" />
+    <ClInclude Include="razor\estimator\remote_estimator_proxy.h" />
+    <ClInclude Include="razor\estimator\sender_bandwidth_estimator.h" />
+    <ClInclude Include="razor\estimator\sender_history.h" />
+    <ClInclude Include="razor\estimator\trendline.h" />
+    <ClInclude Include="razor\pacing\alr_detector.h" />
+    <ClInclude Include="razor\pacing\interval_budget.h" />
+    <ClInclude Include="razor\pacing\pacer_queue.h" />
+    <ClInclude Include="razor\pacing\pace_sender.h" />
+    <ClInclude Include="razor\remb\remb_receiver.h" />
+    <ClInclude Include="razor\remb\remb_sender.h" />
     <ClInclude Include="rtp\rtp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
