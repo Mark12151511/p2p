@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "p2p", "p2p\p2p.vcxproj", "{4FE98922-49A6-4D74-B039-2E4F1B80680B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "razor", "p2p\razor\razor.vcxproj", "{FC045ADE-4652-4EC1-97CB-EFE87F4B099C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{4FE98922-49A6-4D74-B039-2E4F1B80680B}.Release|x64.Build.0 = Release|x64
 		{4FE98922-49A6-4D74-B039-2E4F1B80680B}.Release|x86.ActiveCfg = Release|Win32
 		{4FE98922-49A6-4D74-B039-2E4F1B80680B}.Release|x86.Build.0 = Release|Win32
+		{FC045ADE-4652-4EC1-97CB-EFE87F4B099C}.Debug|x64.ActiveCfg = Debug|x64
+		{FC045ADE-4652-4EC1-97CB-EFE87F4B099C}.Debug|x64.Build.0 = Debug|x64
+		{FC045ADE-4652-4EC1-97CB-EFE87F4B099C}.Debug|x86.ActiveCfg = Debug|Win32
+		{FC045ADE-4652-4EC1-97CB-EFE87F4B099C}.Debug|x86.Build.0 = Debug|Win32
+		{FC045ADE-4652-4EC1-97CB-EFE87F4B099C}.Release|x64.ActiveCfg = Release|x64
+		{FC045ADE-4652-4EC1-97CB-EFE87F4B099C}.Release|x64.Build.0 = Release|x64
+		{FC045ADE-4652-4EC1-97CB-EFE87F4B099C}.Release|x86.ActiveCfg = Release|Win32
+		{FC045ADE-4652-4EC1-97CB-EFE87F4B099C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
