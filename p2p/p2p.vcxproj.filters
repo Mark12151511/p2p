@@ -135,6 +135,18 @@
     <ClCompile Include="RtpPacket.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="RtpSink.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RtpSource.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ENetClient.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ENetServer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fec\rs.h">
@@ -1598,12 +1610,6 @@
     <ClInclude Include="asio\asio.hpp">
       <Filter>源文件\asio</Filter>
     </ClInclude>
-    <ClInclude Include="RtpPacket.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="rtp.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="catch2\catch.hpp">
       <Filter>源文件\catch2</Filter>
     </ClInclude>
@@ -1611,6 +1617,27 @@
       <Filter>源文件\unittest</Filter>
     </ClInclude>
     <ClInclude Include="unittest\unittest.hpp">
+      <Filter>源文件\unittest</Filter>
+    </ClInclude>
+    <ClInclude Include="RtpSink.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RtpSource.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RtpPacket.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteArray.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ENetClient.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ENetServer.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="unittest\enet_test.hpp">
       <Filter>源文件\unittest</Filter>
     </ClInclude>
   </ItemGroup>

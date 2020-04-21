@@ -151,6 +151,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="asio\asio\impl\src.cpp" />
+    <ClCompile Include="ENetClient.cpp" />
+    <ClCompile Include="ENetServer.cpp" />
     <ClCompile Include="enet\callbacks.c" />
     <ClCompile Include="enet\compress.c" />
     <ClCompile Include="enet\host.c" />
@@ -164,6 +166,8 @@
     <ClCompile Include="fec\rs.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RtpPacket.cpp" />
+    <ClCompile Include="RtpSink.cpp" />
+    <ClCompile Include="RtpSource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="asio\asio.hpp" />
@@ -642,7 +646,10 @@
     <ClInclude Include="asio\asio\write.hpp" />
     <ClInclude Include="asio\asio\write_at.hpp" />
     <ClInclude Include="asio\asio\yield.hpp" />
+    <ClInclude Include="ByteArray.hpp" />
     <ClInclude Include="catch2\catch.hpp" />
+    <ClInclude Include="ENetClient.h" />
+    <ClInclude Include="ENetServer.h" />
     <ClInclude Include="enet\callbacks.h" />
     <ClInclude Include="enet\enet.h" />
     <ClInclude Include="enet\list.h" />
@@ -654,8 +661,10 @@
     <ClInclude Include="enet\win32.h" />
     <ClInclude Include="fec\fec.h" />
     <ClInclude Include="fec\rs.h" />
-    <ClInclude Include="rtp.h" />
     <ClInclude Include="RtpPacket.h" />
+    <ClInclude Include="RtpSink.h" />
+    <ClInclude Include="RtpSource.h" />
+    <ClInclude Include="unittest\enet_test.hpp" />
     <ClInclude Include="unittest\fec_test.hpp" />
     <ClInclude Include="unittest\unittest.hpp" />
   </ItemGroup>

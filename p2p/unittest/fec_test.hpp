@@ -28,7 +28,7 @@ TEST_CASE("Test fec codec")
 	// 丢包率 20% , FEC比例 30% 
 	encoder.set_fec_percentage(10);
 	int ret = encoder.encode(in_data, in_size, out_packets);
-	REQUIRE(ret == 1);
+	REQUIRE(ret == 0);
 
 	// 随机丢包(5%)
 	uint32_t  dropped_packets = (uint32_t)(out_packets.size() * 0.05);
@@ -50,7 +50,7 @@ TEST_CASE("Test fec codec")
 		}
 	}
 
-	REQUIRE(is_error == true);
+	REQUIRE(is_error == false);
 
 	delete[] in_data;
 	delete[] out_data;
