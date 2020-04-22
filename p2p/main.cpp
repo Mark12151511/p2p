@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <iostream>
 #include "asio.hpp"
-#include "ByteArray.hpp"
 
 #define CATCH_CONFIG_RUNNER
 
@@ -19,15 +18,20 @@ int main(int argc, char* argv[])
 
 #else
 
+#include "MediaServer.h"
+#include "MediaClient.h"
+
 int main(int argc, char* argv[])
 {
-	try {
+	MediaServer server;
+	server.Start("0.0.0.0", 17676);
+	
+	MediaClient client;
+	client.Connect("127.0.0.1", 17676);
 
-		asio::io_context io_context;
-		io_context.run();
-	}
-	catch (std::exception& e) {
-		std::cerr << "Exception: " << e.what() << "\n";
+	while (1)
+	{
+		Sleep(1);
 	}
 
 	getchar();

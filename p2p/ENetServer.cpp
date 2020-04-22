@@ -33,6 +33,7 @@ bool ENetServer::Start(const char* ip, uint16_t port, uint32_t connections)
 void ENetServer::Stop()
 {
 	if (server_ != nullptr) {
+		connections_.clear();
 		enet_host_destroy(server_);
 		server_ = nullptr;
 	}

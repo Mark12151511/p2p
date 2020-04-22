@@ -3,6 +3,7 @@
 #include "../ENetServer.h"
 #include <random>
 #include <memory>
+#include <thread>
 
 TEST_CASE("Test enet")
 {

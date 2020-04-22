@@ -41,6 +41,7 @@ bool ENetClient::Connect(const char* ip, uint16_t port, uint32_t timeout_msec)
 	}
 	else {
 		enet_peer_reset(peer_);		
+		peer_ = nullptr;
 	}
 
 	Close();

@@ -165,7 +165,10 @@
     <ClCompile Include="fec\fec.cpp" />
     <ClCompile Include="fec\rs.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MediaClient.cpp" />
+    <ClCompile Include="RtpClient.cpp" />
     <ClCompile Include="RtpPacket.cpp" />
+    <ClCompile Include="MediaServer.cpp" />
     <ClCompile Include="RtpSink.cpp" />
     <ClCompile Include="RtpSource.cpp" />
   </ItemGroup>
@@ -661,7 +664,12 @@
     <ClInclude Include="enet\win32.h" />
     <ClInclude Include="fec\fec.h" />
     <ClInclude Include="fec\rs.h" />
+    <ClInclude Include="log.h" />
+    <ClInclude Include="MediaClient.h" />
+    <ClInclude Include="message.hpp" />
+    <ClInclude Include="RtpClient.h" />
     <ClInclude Include="RtpPacket.h" />
+    <ClInclude Include="MediaServer.h" />
     <ClInclude Include="RtpSink.h" />
     <ClInclude Include="RtpSource.h" />
     <ClInclude Include="unittest\enet_test.hpp" />
