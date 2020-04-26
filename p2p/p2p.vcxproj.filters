@@ -156,6 +156,9 @@
     <ClCompile Include="MediaClient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="UdpSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fec\rs.h">
@@ -1663,6 +1666,12 @@
     </ClInclude>
     <ClInclude Include="MediaClient.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UdpSocket.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="unittest\udp_socket_test.hpp">
+      <Filter>源文件\unittest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

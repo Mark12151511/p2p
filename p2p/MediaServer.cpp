@@ -56,7 +56,6 @@ void MediaServer::Stop()
 
 void MediaServer::SendActiveAck(uint32_t cid, uint32_t uid, uint32_t cseq)
 {
-	
 	ByteArray byte_array;
 	ActiveAckMsg msg;
 	int size = msg.Encode(byte_array);
