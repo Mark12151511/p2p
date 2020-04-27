@@ -166,7 +166,6 @@
     <ClCompile Include="fec\rs.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MediaClient.cpp" />
-    <ClCompile Include="RtpClient.cpp" />
     <ClCompile Include="RtpPacket.cpp" />
     <ClCompile Include="MediaServer.cpp" />
     <ClCompile Include="RtpSink.cpp" />
@@ -668,7 +667,6 @@
     <ClInclude Include="log.h" />
     <ClInclude Include="MediaClient.h" />
     <ClInclude Include="message.hpp" />
-    <ClInclude Include="RtpClient.h" />
     <ClInclude Include="RtpPacket.h" />
     <ClInclude Include="MediaServer.h" />
     <ClInclude Include="RtpSink.h" />

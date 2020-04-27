@@ -1,9 +1,15 @@
 #include "RtpPacket.h"
+#include "asio/asio.hpp"
 
 RtpPacket::RtpPacket()
 	: payload_size_(0)
+	, max_packet_size_(kMaxPacketSize)
+	, packet_(new uint8_t[kMaxPacketSize])
 {
+	rtp_header_ = (RtpHeader*)packet_.get();
 	memset(&rtp_header_, 0, sizeof(RtpHeader));
+
+	rtp_header_->version = RTP_VERSION;
 }
 
 RtpPacket::~RtpPacket()
@@ -11,119 +17,129 @@ RtpPacket::~RtpPacket()
 
 }
 
-inline void RtpPacket::SetRtpHeader(uint8_t* data, uint8_t size)
+uint8_t* RtpPacket::Get()
 {
-	memcpy(&rtp_header_, data, size);
+	return packet_.get();
 }
 
-inline void RtpPacket::SetPayload(uint8_t* data, uint32_t size)
+uint32_t RtpPacket::Size()
 {
-	if (payload_size_ < size) {
-		payload_.reset(new uint8_t[size]);
+	return RTP_HEADER_SIZE + payload_size_;
+}
+
+void RtpPacket::SetRtpHeader(uint8_t* data, uint8_t size)
+{
+	memcpy(rtp_header_, data, size);
+}
+
+void RtpPacket::SetPayload(uint8_t* data, uint32_t size)
+{
+	if (MAX_RTP_PAYLOAD_SIZE < size) {
+		return;
 	}
 
 	payload_size_ = size;
-	memcpy(payload_.get(), data, size);
+	memcpy(packet_.get() + RTP_HEADER_SIZE, data, size);
 }
 
-inline void RtpPacket::SetCSRC(uint8_t csrc)
+void RtpPacket::SetCSRC(uint8_t csrc)
 {
-	rtp_header_.csrc = csrc;
+	rtp_header_->csrc = csrc;
 }
 
-inline void RtpPacket::SetExtension(uint8_t extension)
+void RtpPacket::SetExtension(uint8_t extension)
 {
-	rtp_header_.extension = extension;
+	rtp_header_->extension = extension;
 }
 
-inline void RtpPacket::SetPadding(uint8_t padding)
+void RtpPacket::SetPadding(uint8_t padding)
 {
-	rtp_header_.padding = padding;
+	rtp_header_->padding = padding;
 }
 
-inline void RtpPacket::SetVersion(uint8_t version)
+void RtpPacket::SetVersion(uint8_t version)
 {
-	rtp_header_.version = version;
+	rtp_header_->version = version;
 }
 
-inline void RtpPacket::SetPayloadType(uint8_t payload_type)
+void RtpPacket::SetPayloadType(uint8_t payload_type)
 {
-	rtp_header_.payload = payload_type;
+	rtp_header_->payload = payload_type;
 }
 
-inline void RtpPacket::SetMarker(uint8_t marker)
+void RtpPacket::SetMarker(uint8_t marker)
 {
-	rtp_header_.marker = marker;
+	rtp_header_->marker = marker;
 }
 
-inline void RtpPacket::SetSeq(uint16_t seq)
+void RtpPacket::SetSeq(uint16_t seq)
 {
-	rtp_header_.seq = seq;
+	rtp_header_->seq = htons(seq); 
 }
 
-inline void RtpPacket::SetTimestamp(uint32_t timestamp)
+void RtpPacket::SetTimestamp(uint32_t timestamp)
 {
-	rtp_header_.timestamp = timestamp;
+	rtp_header_->timestamp = htonl(timestamp);
 }
 
-inline void RtpPacket::SetSSRC(uint32_t ssrc)
+void RtpPacket::SetSSRC(uint32_t ssrc)
 {
-	rtp_header_.ssrc = ssrc;
+	rtp_header_->ssrc = htonl(ssrc);
 }
 
-inline uint32_t RtpPacket::GetPayload(uint8_t* buffer, uint32_t buffer_size) const
+uint32_t RtpPacket::GetPayload(uint8_t* buffer, uint32_t buffer_size) const
 {
 	if (payload_size_ > 0) {
 		uint32_t copy_size = buffer_size >= payload_size_ ? payload_size_ : buffer_size;
-		memcpy(buffer, payload_.get(), copy_size);
+		memcpy(buffer, packet_.get() + RTP_HEADER_SIZE, copy_size);
 		return payload_size_;
 	}
 
 	return 0;
 }
 
-inline uint8_t RtpPacket::GetCSRC() const
+uint8_t RtpPacket::GetCSRC() const
 {
-	return rtp_header_.csrc;
+	return rtp_header_->csrc;
 }
 
-inline uint8_t RtpPacket::GetExtension()const
+uint8_t RtpPacket::GetExtension()const
 {
-	return rtp_header_.extension;
+	return rtp_header_->extension;
 }
 
-inline uint8_t RtpPacket::GetPadding()const
+uint8_t RtpPacket::GetPadding()const
 {
-	return rtp_header_.padding;
+	return rtp_header_->padding;
 }
 
-inline uint8_t RtpPacket::GetVersion()const
+uint8_t RtpPacket::GetVersion()const
 {
-	return rtp_header_.version;
+	return rtp_header_->version;
 }
 
-inline uint8_t RtpPacket::GetPayloadType()const
+uint8_t RtpPacket::GetPayloadType()const
 {
-	return rtp_header_.payload;
+	return rtp_header_->payload;
 }
 
-inline uint8_t RtpPacket::GetMarker()const
+uint8_t RtpPacket::GetMarker()const
 {
-	return rtp_header_.marker;
+	return rtp_header_->marker;
 }
 
-inline uint16_t RtpPacket::GetSeq()const
+uint16_t RtpPacket::GetSeq()const
 {
-	return rtp_header_.seq;
+	return ntohs(rtp_header_->seq);
 }
 
-inline uint32_t RtpPacket::GetTimestamp()const
+uint32_t RtpPacket::GetTimestamp()const
 {
-	return rtp_header_.timestamp;
+	return ntohl(rtp_header_->timestamp);
 }
 
-inline uint32_t RtpPacket::GetSSRC()const
+uint32_t RtpPacket::GetSSRC()const
 {
-	return rtp_header_.ssrc;
+	return ntohl(rtp_header_->ssrc);
 }
 

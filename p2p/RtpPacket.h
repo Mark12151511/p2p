@@ -31,34 +31,40 @@ public:
 	RtpPacket();
 	virtual ~RtpPacket();
 
-	inline void SetRtpHeader(uint8_t* data, uint8_t size);
-	inline void SetPayload(uint8_t* data, uint32_t size);
-	inline void SetCSRC(uint8_t csrc);
-	inline void SetExtension(uint8_t extension);
-	inline void SetPadding(uint8_t padding);
-	inline void SetVersion(uint8_t version);
-	inline void SetPayloadType(uint8_t payload_type);
-	inline void SetMarker(uint8_t marker);
-	inline void SetSeq(uint16_t seq);
-	inline void SetTimestamp(uint32_t timestamp);
-	inline void SetSSRC(uint32_t ssrc);
+	uint8_t* Get();
+	uint32_t Size();
 
-	inline uint32_t GetPayload(uint8_t* buffer, uint32_t buffer_size) const;
-	inline uint8_t  GetCSRC() const;
-	inline uint8_t  GetExtension() const;
-	inline uint8_t  GetPadding() const;
-	inline uint8_t  GetVersion() const;
-	inline uint8_t  GetPayloadType() const;
-	inline uint8_t  GetMarker() const;
-	inline uint16_t GetSeq() const;
-	inline uint32_t GetTimestamp() const;
-	inline uint32_t GetSSRC() const;
+	void SetRtpHeader(uint8_t* data, uint8_t size);
+	void SetPayload(uint8_t* data, uint32_t size);
+	void SetCSRC(uint8_t csrc);
+	void SetExtension(uint8_t extension);
+	void SetPadding(uint8_t padding);
+	void SetVersion(uint8_t version);
+	void SetPayloadType(uint8_t payload_type);
+	void SetMarker(uint8_t marker);
+	void SetSeq(uint16_t seq);
+	void SetTimestamp(uint32_t timestamp);
+	void SetSSRC(uint32_t ssrc);
+
+	uint32_t GetPayload(uint8_t* buffer, uint32_t buffer_size) const;
+	uint8_t  GetCSRC() const;
+	uint8_t  GetExtension() const;
+	uint8_t  GetPadding() const;
+	uint8_t  GetVersion() const;
+	uint8_t  GetPayloadType() const;
+	uint8_t  GetMarker() const;
+	uint16_t GetSeq() const;
+	uint32_t GetTimestamp() const;
+	uint32_t GetSSRC() const;
 
 private:
-	RtpHeader rtp_header_;
+	RtpHeader* rtp_header_;
 
-	std::shared_ptr<uint8_t> payload_;
+	std::shared_ptr<uint8_t> packet_;
+	uint32_t max_packet_size_;
 	uint32_t payload_size_;
+
+	static const int kMaxPacketSize = RTP_HEADER_SIZE + MAX_RTP_PAYLOAD_SIZE;
 };
 
 #endif

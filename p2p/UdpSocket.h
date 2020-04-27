@@ -22,7 +22,7 @@ public:
 	{ return loacal_endpoint_;  }
 
 private:
-	asio::io_context& io_context_;
+	asio::io_context::strand io_strand_;
 	std::unique_ptr<asio::ip::udp::socket> socket_;
 	asio::ip::udp::endpoint loacal_endpoint_;
 	asio::ip::udp::endpoint remote_endpoint_;

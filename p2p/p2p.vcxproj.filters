@@ -147,9 +147,6 @@
     <ClCompile Include="ENetServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="RtpClient.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="MediaServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -1648,9 +1645,6 @@
     </ClInclude>
     <ClInclude Include="unittest\enet_test.hpp">
       <Filter>源文件\unittest</Filter>
-    </ClInclude>
-    <ClInclude Include="RtpClient.h">
-      <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="message.hpp">
       <Filter>源文件</Filter>
