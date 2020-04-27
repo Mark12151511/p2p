@@ -166,7 +166,6 @@
     <ClCompile Include="fec\rs.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MediaClient.cpp" />
-    <ClCompile Include="RtpPacket.cpp" />
     <ClCompile Include="MediaServer.cpp" />
     <ClCompile Include="RtpSink.cpp" />
     <ClCompile Include="RtpSource.cpp" />
@@ -667,13 +666,14 @@
     <ClInclude Include="log.h" />
     <ClInclude Include="MediaClient.h" />
     <ClInclude Include="message.hpp" />
-    <ClInclude Include="RtpPacket.h" />
     <ClInclude Include="MediaServer.h" />
+    <ClInclude Include="RtpPacket.hpp" />
     <ClInclude Include="RtpSink.h" />
     <ClInclude Include="RtpSource.h" />
     <ClInclude Include="UdpSocket.h" />
     <ClInclude Include="unittest\enet_test.hpp" />
     <ClInclude Include="unittest\fec_test.hpp" />
+    <ClInclude Include="unittest\rtp_test.hpp" />
     <ClInclude Include="unittest\udp_socket_test.hpp" />
     <ClInclude Include="unittest\unittest.hpp" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 #define RTP_SINK_H
 
 #include "UdpSocket.h"
-#include "RtpPacket.h"
+#include "RtpPacket.hpp"
 
 class RtpSink : public std::enable_shared_from_this<RtpSink>
 {
@@ -39,6 +39,7 @@ private:
 
 	std::unique_ptr<RtpPacket> rtp_packet_;
 
+	int packet_seq_ = 0;
 	int packet_size_ = 1024;
 	int use_fec_ = 0;
 };

@@ -27,6 +27,10 @@ bool UdpSocket::Open(std::string ip, uint16_t port)
 		return false;
 	}
 
+	socket_base::send_buffer_size send_buffer_size(100 * 1024);
+	socket_base::receive_buffer_size receive_buffer_size(100 * 1024);
+	socket_->set_option(send_buffer_size);
+	socket_->set_option(receive_buffer_size);
 	loacal_endpoint_ = socket_->local_endpoint();
 	return true;
 }
@@ -45,7 +49,11 @@ bool UdpSocket::Send(void* data, size_t size, ip::udp::endpoint remote_endpoint)
 		return false;
 	}
 
-	socket_->send_to(buffer(data, size), remote_endpoint);
+	int ret = socket_->send_to(buffer(data, size), remote_endpoint);
+	if (ret != size) {
+		return false;
+	}
+
 	return true;
 }
 
@@ -61,7 +69,7 @@ bool UdpSocket::Receive(std::function<bool(void*, size_t, asio::ip::udp::endpoin
 				if (cb) {
 					if (cb(data_.get(), bytes_recvd, remote_endpoint_)) {
 						Receive(cb);
-					}
+					}				
 				}
 			}
 		}));

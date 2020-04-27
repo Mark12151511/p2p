@@ -31,4 +31,7 @@ TEST_CASE("Test udp socket")
 	});
 
 	io_context.run();
+
+	sender_socket.Close();
+	receiver_socket.Close();
 }

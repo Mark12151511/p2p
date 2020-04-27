@@ -8,7 +8,7 @@ ENetServer::ENetServer()
 
 ENetServer::~ENetServer()
 {
-
+	Stop();
 }
 
 bool ENetServer::Start(const char* ip, uint16_t port, uint32_t connections)

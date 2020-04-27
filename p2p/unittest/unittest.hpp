@@ -4,5 +4,6 @@
 #include "fec_test.hpp"
 #include "enet_test.hpp"
 #include "udp_socket_test.hpp"
+#include "rtp_test.hpp"
 
 #endif

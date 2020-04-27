@@ -132,9 +132,6 @@
     <ClCompile Include="asio\asio\impl\src.cpp">
       <Filter>源文件\asio\asio\impl</Filter>
     </ClCompile>
-    <ClCompile Include="RtpPacket.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="RtpSink.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -1634,9 +1631,6 @@
     <ClInclude Include="RtpSource.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="RtpPacket.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="ENetClient.h">
       <Filter>源文件</Filter>
     </ClInclude>
@@ -1665,6 +1659,12 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="unittest\udp_socket_test.hpp">
+      <Filter>源文件\unittest</Filter>
+    </ClInclude>
+    <ClInclude Include="RtpPacket.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="unittest\rtp_test.hpp">
       <Filter>源文件\unittest</Filter>
     </ClInclude>
   </ItemGroup>

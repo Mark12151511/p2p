@@ -54,6 +54,6 @@ TEST_CASE("Test enet")
 	
 	server_thread.join();
 	client_thread.join();
-
+	server.Stop();
 	enet_deinitialize();
 }
