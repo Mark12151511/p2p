@@ -22,6 +22,9 @@ public:
 	void SetMediaCB(MediaCB cb) 
 	{ media_cb_ = cb; }
 
+	uint16_t GetRtpPort()  const;
+	uint16_t GetRtcpPort() const;
+
 private:
 	bool OnRead(void* data, size_t size);
 	bool OnFrame();

@@ -43,7 +43,7 @@ bool RtpSource::Open(uint16_t rtp_port, uint16_t rtcp_port)
 bool RtpSource::Open()
 {
 	std::random_device rd;
-	for (int n = 0; n <= 10; n++) {
+	for (int n = 0; n <= 50; n++) {
 		if (n == 10) {
 			return false;
 		}
@@ -71,6 +71,24 @@ void RtpSource::Close()
 	}
 }
 
+uint16_t RtpSource::GetRtpPort() const
+{
+	if (rtp_socket_) {
+		return rtp_socket_->GetLocalPoint().port();
+	}
+
+	return 0;
+}
+
+uint16_t RtpSource::GetRtcpPort() const
+{
+	if (rtcp_socket_) {
+		return rtcp_socket_->GetLocalPoint().port();
+	}
+
+	return 0;
+}
+
 bool RtpSource::OnRead(void* data, size_t size)
 {
 	if (size < RTP_HEADER_SIZE) {
@@ -81,7 +99,7 @@ bool RtpSource::OnRead(void* data, size_t size)
 	packet->SetRtpHeader((uint8_t*)data, RTP_HEADER_SIZE);
 
 	if (size > RTP_HEADER_SIZE) {
-		packet->SetPayload((uint8_t*)data + RTP_HEADER_SIZE, size - RTP_HEADER_SIZE);
+		packet->SetPayload((uint8_t*)data + RTP_HEADER_SIZE, (uint32_t)size - RTP_HEADER_SIZE);
 	}
 
 	uint8_t  mark = packet->GetMarker();

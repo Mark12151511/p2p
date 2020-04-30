@@ -39,6 +39,7 @@ bool MediaServer::Start(const char* ip, uint16_t port)
 		EventLoop();
 	}));
 	
+	io_service_work_.reset(new asio::io_service::work(io_service_));
 	return true;
 }
 
@@ -51,6 +52,8 @@ void MediaServer::Stop()
 		event_thread_->join();
 		event_thread_ = nullptr;
 		event_server_.Stop();
+		media_sessions_.clear();
+		io_service_work_.reset();
 	}
 }
 
@@ -69,22 +72,36 @@ void MediaServer::EventLoop()
 		}
 		else if (msg_len < 0) {
 			/* client disconnect */
+			media_sessions_.erase(cid);
 		}
 	}
 }
 
 void MediaServer::OnMessage(uint32_t cid, const char* message, uint32_t len)
 {
-	if (len > 0) {
-		int msg_type = message[0];
-		ByteArray byte_array((char*)message, len);
-		if (msg_type == MSG_ACTIVE) {
+	int msg_type = message[0];
+	ByteArray byte_array((char*)message, len);
+
+	switch(msg_type)
+	{
+	case MSG_ACTIVE:
+		{
 			ActiveMsg active_msg;
 			active_msg.Decode(byte_array);
 			if (strcmp(TEST_TOKEN, active_msg.GetToken()) == 0) {
 				SendActiveAck(cid, active_msg.GetUid(), active_msg.GetCSeq());
 			}
 		}
+		break;
+	case MSG_SETUP:
+		{
+			SetupMsg setup_msg;
+			setup_msg.Decode(byte_array);
+		}
+		break;
+
+	default:
+		break;
 	}
 }
 
@@ -92,6 +109,8 @@ void MediaServer::SendActiveAck(uint32_t cid, uint32_t uid, uint32_t cseq)
 {
 	ByteArray byte_array;
 	ActiveAckMsg msg;
+	msg.SetUid(uid);
+	msg.SetCSeq(cseq);
 	int size = msg.Encode(byte_array);
 	if (size > 0) {
 		event_server_.Send(cid, byte_array.Data(), size);

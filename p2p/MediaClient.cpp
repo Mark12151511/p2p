@@ -33,6 +33,7 @@ bool MediaClient::Connect(const char* ip, uint16_t port, uint32_t timeout_msec)
 
 	if (!event_client_.Connect(ip, port, timeout_msec)) {
 		LOG("Event client connect failed.");
+		return false;
 	}
 
 	is_started_ = true;
@@ -46,7 +47,12 @@ bool MediaClient::Connect(const char* ip, uint16_t port, uint32_t timeout_msec)
 		return false;
 	}
 	
-	Start();
+	if (!Start()) {
+		Stop();
+		return false;
+	}
+
+	SendSetup();
 	return true;
 }
 
@@ -56,24 +62,42 @@ void MediaClient::Close()
 	Stop();	
 }
 
-void MediaClient::Start()
+bool MediaClient::Start()
 {
 	if (is_started_) {
+		io_service_work_.reset(new asio::io_service::work(io_service_));
+		rtp_source_.reset(new RtpSource(io_service_));
+		if (!rtp_source_->Open()) {
+			LOG("Rtp source open failed.");
+			rtp_source_.reset();
+			return false;
+		}
+
 		if (event_thread_ == nullptr) {
 			event_thread_.reset(new std::thread([this] {
 				PollEvent();
 			}));
 		}
 	}
+
+	return true;
 }
 
 void MediaClient::Stop()
 {
 	if (is_started_) {
 		is_started_ = false;
-		event_thread_->join();
-		event_thread_ = nullptr;
+		if (event_thread_ != nullptr) {
+			event_thread_->join();
+			event_thread_ = nullptr;
+		}
+
 		event_client_.Close();
+		io_service_work_.reset();
+
+		is_active_ = false;
+		is_setup_ = false;
+		is_play_ = false;
 	}
 }
 
@@ -81,20 +105,6 @@ bool MediaClient::IsConnected()
 {
 	std::lock_guard<std::mutex> locker(mutex_);
 	return is_active_;
-}
-
-void MediaClient::SendActive()
-{
-	if (event_client_.IsConnected()) {
-		std::string token = TEST_TOKEN;
-		ByteArray byte_array;
-
-		ActiveMsg msg(token.c_str(), token.size() + 1);
-		int size = msg.Encode(byte_array);
-		if (size > 0) {
-			event_client_.Send(byte_array.Data(), size);
-		}
-	}
 }
 
 void MediaClient::PollEvent(bool once, uint32_t timeout_msec)
@@ -113,8 +123,11 @@ void MediaClient::PollEvent(bool once, uint32_t timeout_msec)
 				break;
 			}
 		}
+		else if(msg_len < 0) {
+			is_active_ = false;
+		}
 
-		if (event_client_.IsConnected()) {
+		if (!event_client_.IsConnected()) {
 			is_active_ = false;
 		}
 
@@ -146,4 +159,40 @@ bool MediaClient::OnMessage(const char* message, uint32_t len)
 	}
 
 	return true;
+}
+
+void MediaClient::SendActive()
+{
+	if (event_client_.IsConnected()) {
+		std::string token = TEST_TOKEN;
+		ByteArray byte_array;
+
+		ActiveMsg msg(token.c_str(), (uint32_t)token.size() + 1);
+		int size = msg.Encode(byte_array);
+		if (size > 0) {
+			event_client_.Send(byte_array.Data(), size);
+		}
+	}
+}
+
+void MediaClient::SendSetup()
+{
+	if (event_client_.IsConnected()) {
+
+		uint16_t rtp_port = 0;
+		uint16_t rtcp_port = 0;
+		if (rtp_source_) {
+			rtp_port = rtp_source_->GetRtpPort();
+			rtcp_port = rtp_source_->GetRtcpPort();
+		}
+
+		if (rtp_port > 0 && rtcp_port > 0) {
+			ByteArray byte_array;
+			SetupMsg msg(rtp_port, rtcp_port);
+			int size = msg.Encode(byte_array);
+			if (size > 0) {
+				event_client_.Send(byte_array.Data(), size);
+			}
+		}
+	}
 }

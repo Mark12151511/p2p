@@ -5,6 +5,8 @@
 #include <thread>
 #include <memory>
 #include "ENetServer.h"
+#include "MediaSession.h"
+#include "asio.hpp"
 
 class MediaServer
 {
@@ -30,6 +32,12 @@ private:
 
 	std::shared_ptr<std::thread> event_thread_;
 	ENetServer event_server_;
+
+	asio::io_service io_service_;
+	std::unique_ptr<asio::io_service::work> io_service_work_;
+
+	typedef std::shared_ptr<MediaSession> MediaSessionPtr;
+	std::map<uint32_t, MediaSessionPtr> media_sessions_;
 
 	static const int kMaxConnectios = 2;
 };

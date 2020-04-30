@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -167,6 +167,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MediaClient.cpp" />
     <ClCompile Include="MediaServer.cpp" />
+    <ClCompile Include="MediaSession.cpp" />
     <ClCompile Include="RtpSink.cpp" />
     <ClCompile Include="RtpSource.cpp" />
     <ClCompile Include="UdpSocket.cpp" />
@@ -665,6 +666,7 @@
     <ClInclude Include="fec\rs.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="MediaClient.h" />
+    <ClInclude Include="MediaSession.h" />
     <ClInclude Include="message.hpp" />
     <ClInclude Include="MediaServer.h" />
     <ClInclude Include="RtpPacket.hpp" />

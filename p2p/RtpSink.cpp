@@ -93,7 +93,7 @@ uint16_t RtpSink::GetRtpPort() const
 uint16_t RtpSink::GetRtcpPort() const
 {
 	if (rtcp_socket_) {
-		return rtp_socket_->GetLocalPoint().port();
+		return rtcp_socket_->GetLocalPoint().port();
 	}
 
 	return 0;
