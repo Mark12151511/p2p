@@ -12,14 +12,31 @@ enum MsgType
 {
 	MIN_MSG_ID = 0x10,
 
+	/* 请求连接 */
 	MSG_ACTIVE,
 	MSG_ACTIVE_ACK,
 
+	/* 建立会话 */
+	MSG_SETUP,
+	MSG_SETUP_ACK,
+
+	/* 请求音视频流 */
+	MSG_PLAY,
+	MSG_PLAY_ACK,
+
+	/* 心跳 */
 	MSG_PING,
 	MSG_PONG,
 
+	/* 请求关键帧 */
 	MSG_FORCE_IDR,
+
+	/* 反馈信息 */
 	MSG_FEEDBACK,
+
+	/* 关闭连接 */
+	MSG_TEARDOWN,
+	MSG_TEARDOWN_ACK,
 
 	MAX_MSG_ID
 };
@@ -27,12 +44,6 @@ enum MsgType
 class MsgHeader
 {
 public:
-	uint8_t  type_;
-	uint8_t  version_;
-	uint32_t uid_;
-	uint32_t cseq_;
-	uint32_t timestamp_;
-
 	MsgHeader() 
 	{
 		type_ = 0;
@@ -40,6 +51,7 @@ public:
 		uid_ = 0;
 		cseq_ = 0;
 		timestamp_ = 0;
+		error_code_ = 0;
 	}
 
 	uint8_t GetType() 
@@ -83,6 +95,17 @@ public:
 		cseq_ = byte_array.ReadUint32BE();
 		timestamp_ = byte_array.ReadUint32BE();
 	}
+
+	int GetErrorCode()
+	{ return error_code_; }
+
+protected:
+	uint8_t  type_;
+	uint8_t  version_;
+	uint32_t uid_;
+	uint32_t cseq_;
+	uint32_t timestamp_;
+	uint32_t error_code_;
 };
 
 class ActiveMsg : public MsgHeader
@@ -145,8 +168,11 @@ private:
 class ActiveAckMsg : public MsgHeader
 {
 public:
-	ActiveAckMsg() 
-	{ type_ = MSG_ACTIVE_ACK; }
+	ActiveAckMsg(uint32_t error_code = 0)
+	{ 
+		error_code_ = error_code;
+		type_ = MSG_ACTIVE_ACK; 
+	}
 
 	int Encode(ByteArray& byte_array)
 	{
@@ -159,10 +185,32 @@ public:
 		DecodeHeader(byte_array);
 		return byte_array.Size();
 	}
+
+private:
+	uint32_t error_code_;
 };
 
-class FirMsg : public MsgHeader
+class SetupMsg : public MsgHeader
 {
+public:
+	SetupMsg(uint16_t rtp_port, uint16_t rtcp_port)
+	{
+		type_ = MSG_SETUP;
+	}
+
+private:
+	uint16_t rtp_port  = 0;
+	uint16_t rtcp_port = 0;
+};
+
+class SetupAckMsg : public MsgHeader
+{
+public:
+	SetupAckMsg(uint32_t error_code = 0)
+	{
+		error_code_ = error_code;
+		type_ = MSG_SETUP_ACK;
+	}
 
 private:
 	

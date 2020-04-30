@@ -39,6 +39,15 @@ void ENetServer::Stop()
 	}
 }
 
+bool ENetServer::IsConnected(uint32_t cid)
+{
+	if (connections_.find(cid) != connections_.end()) {
+		return true;
+	}
+
+	return false;
+}
+
 int ENetServer::Send(uint32_t cid, void* data, uint32_t size)
 {
 	if (server_ == nullptr) {
@@ -76,7 +85,11 @@ int ENetServer::Recv(uint32_t* cid, void* data, uint32_t size, uint32_t timeout_
 		connections_[peer->connectID] = peer;
 		break;
 	case ENET_EVENT_TYPE_DISCONNECT:
-		connections_.erase(peer->connectID);
+		{
+			connections_.erase(peer->connectID);
+			*cid = peer->connectID;
+			return -1;
+		}
 		break;
 	case ENET_EVENT_TYPE_RECEIVE:
 		{

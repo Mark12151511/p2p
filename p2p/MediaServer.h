@@ -21,9 +21,10 @@ public:
 	//int SetEventCallback();
 
 private:
-	void SendActiveAck(uint32_t cid, uint32_t uid, uint32_t cseq);
 	void EventLoop();
-
+	void OnMessage(uint32_t cid, const char* message, uint32_t len);
+	void SendActiveAck(uint32_t cid, uint32_t uid, uint32_t cseq);
+	
 	std::mutex mutex_;
 	bool is_started_ = false;
 

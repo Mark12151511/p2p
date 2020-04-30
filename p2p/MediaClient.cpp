@@ -8,7 +8,9 @@ using namespace xop;
 
 MediaClient::MediaClient()
 {
-
+	is_active_ = false;
+	is_setup_  = false;
+	is_play_   = false;
 }
 
 MediaClient::~MediaClient()
@@ -25,30 +27,60 @@ bool MediaClient::Connect(const char* ip, uint16_t port, uint32_t timeout_msec)
 		enet_initialize();
 	});
 
-	if (!event_client_.Connect(ip, port, timeout_msec)) {
-		LOG(" Event client connect failed.");
+	if (is_started_) {
+		Stop();
 	}
 
-	SendActive();
+	if (!event_client_.Connect(ip, port, timeout_msec)) {
+		LOG("Event client connect failed.");
+	}
 
 	is_started_ = true;
-	event_thread_.reset(new std::thread([this] {
-		EventLoop();
-	}));
 
+	SendActive();
+	PollEvent(true, timeout_msec / 2);
+
+	if (!is_active_) {
+		event_client_.Close();
+		is_started_ = false;
+		return false;
+	}
+	
+	Start();
 	return true;
 }
 
 void MediaClient::Close()
 {
 	std::lock_guard<std::mutex> locker(mutex_);
+	Stop();	
+}
 
+void MediaClient::Start()
+{
+	if (is_started_) {
+		if (event_thread_ == nullptr) {
+			event_thread_.reset(new std::thread([this] {
+				PollEvent();
+			}));
+		}
+	}
+}
+
+void MediaClient::Stop()
+{
 	if (is_started_) {
 		is_started_ = false;
 		event_thread_->join();
 		event_thread_ = nullptr;
 		event_client_.Close();
 	}
+}
+
+bool MediaClient::IsConnected()
+{
+	std::lock_guard<std::mutex> locker(mutex_);
+	return is_active_;
 }
 
 void MediaClient::SendActive()
@@ -65,25 +97,53 @@ void MediaClient::SendActive()
 	}
 }
 
-void MediaClient::EventLoop()
+void MediaClient::PollEvent(bool once, uint32_t timeout_msec)
 {
-	uint32_t msec = 5;
+	uint32_t msec = timeout_msec;
 	uint32_t cid = 0;
 	uint32_t max_message_len = 1500;
 	std::shared_ptr<uint8_t> message(new uint8_t[max_message_len]);
 
-	while (is_started_)
+	while (is_started_ )
 	{
 		int msg_len = event_client_.Recv(message.get(), max_message_len, msec);
 		if (msg_len > 0) {
-			int msg_type = message.get()[0];
-			ByteArray byte_array((char*)message.get(), msg_len);
-
-			if (msg_type == MSG_ACTIVE_ACK) {
-				ActiveAckMsg active_ack_msg;
-				active_ack_msg.Decode(byte_array);
-				printf("recv ack!\n");
+			if (!OnMessage((char*)message.get(), msg_len)) {
+				is_active_ = false;
+				break;
 			}
 		}
+
+		if (event_client_.IsConnected()) {
+			is_active_ = false;
+		}
+
+		if (once) {
+			break;
+		}
 	}
+}
+
+bool MediaClient::OnMessage(const char* message, uint32_t len)
+{
+	int msg_type = message[0];
+	ByteArray byte_array(message, len);
+
+	switch (msg_type)
+	{
+	case MSG_ACTIVE_ACK:
+		{
+			ActiveAckMsg active_ack_msg;
+			active_ack_msg.Decode(byte_array);
+			if (active_ack_msg.GetErrorCode()) {
+				return false;
+			}
+			is_active_ = true;
+		}
+		break;
+	default:
+		break;
+	}
+
+	return true;
 }

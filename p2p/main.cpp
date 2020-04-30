@@ -31,7 +31,11 @@ int main(int argc, char* argv[])
 
 	while (1)
 	{
-		Sleep(1);
+		if (!client.IsConnected()) {
+			break;
+		}
+
+		Sleep(1000);
 	}
 
 	getchar();

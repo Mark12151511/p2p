@@ -13,7 +13,7 @@ MediaServer::MediaServer()
 
 MediaServer::~MediaServer()
 {
-
+	Stop();
 }
 
 bool MediaServer::Start(const char* ip, uint16_t port)
@@ -54,16 +54,6 @@ void MediaServer::Stop()
 	}
 }
 
-void MediaServer::SendActiveAck(uint32_t cid, uint32_t uid, uint32_t cseq)
-{
-	ByteArray byte_array;
-	ActiveAckMsg msg;
-	int size = msg.Encode(byte_array);
-	if (size > 0) {
-		event_server_.Send(cid, byte_array.Data(), size);
-	}
-}
-
 void MediaServer::EventLoop()
 {
 	uint32_t msec = 5;
@@ -75,15 +65,35 @@ void MediaServer::EventLoop()
 	{
 		int msg_len = event_server_.Recv(&cid, message.get(), max_message_len, msec);
 		if (msg_len > 0) {
-			int msg_type = message.get()[0];
-			ByteArray byte_array((char*)message.get(), msg_len);
-			if (msg_type == MSG_ACTIVE) {
-				ActiveMsg active_msg;
-				active_msg.Decode(byte_array);
-				if (strcmp(TEST_TOKEN, active_msg.GetToken()) == 0) {					
-					SendActiveAck(cid, active_msg.GetUid(), active_msg.GetCSeq());
-				}
+			OnMessage(cid, (char*)message.get(), msg_len);
+		}
+		else if (msg_len < 0) {
+			/* client disconnect */
+		}
+	}
+}
+
+void MediaServer::OnMessage(uint32_t cid, const char* message, uint32_t len)
+{
+	if (len > 0) {
+		int msg_type = message[0];
+		ByteArray byte_array((char*)message, len);
+		if (msg_type == MSG_ACTIVE) {
+			ActiveMsg active_msg;
+			active_msg.Decode(byte_array);
+			if (strcmp(TEST_TOKEN, active_msg.GetToken()) == 0) {
+				SendActiveAck(cid, active_msg.GetUid(), active_msg.GetCSeq());
 			}
 		}
+	}
+}
+
+void MediaServer::SendActiveAck(uint32_t cid, uint32_t uid, uint32_t cseq)
+{
+	ByteArray byte_array;
+	ActiveAckMsg msg;
+	int size = msg.Encode(byte_array);
+	if (size > 0) {
+		event_server_.Send(cid, byte_array.Data(), size);
 	}
 }

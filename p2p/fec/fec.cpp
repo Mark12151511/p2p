@@ -25,14 +25,25 @@ namespace fec
 {
 
 static const int MAX_VIDEO_BUFFER_SIZE = MAX_PACKET_PAYLOAD_SIZE - sizeof(FecHeader);
-static const int MAX_FEC_SHARDS = 200;
+static const int MAX_FEC_SHARDS = 250; // MAX_FEC_SHARDS >= data shards + parity_shards
 
+/* 计算冗余分片数据 */
 static int CalculateParityShards(int data_shards, int fec_percentage) 
 {
 	int total_parity_shards = (data_shards * fec_percentage + 99) / 100;
 	return total_parity_shards;
 }
 
+/* 
+单帧数据太大, 需要多个数据包共享一个分片。抗丢包能力会下降。
+一个分片对应一个数据包, 效果最好, 但是对单帧数据大小有限制。
+
+原因: 
+假设有1000个数据包, 数据分片为50, 冗余分片为10, 总数据包个数为1200。
+那么每20个数据包共享1个分片, 可以看成20组数据, 每组数据有60个数据包, 每组允许的最大丢包数则为10。
+理论上丢包个数在200以内可以恢复, 前提是每个组均匀丢弃10个包。
+如果一个组丢包数超过了10个包, 那个这个组是无法恢复的, 其他组可恢复, 但是单帧数据就不完整了。
+*/
 static int CalculateFECShardPackets(int len, int fec_percentage)
 {
 	int max_data_shards = ((MAX_FEC_SHARDS - 2) * 100 + 99 + fec_percentage) / (100 + fec_percentage);
